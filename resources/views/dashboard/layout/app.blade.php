@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ $data['page'] }} :: Adamawa State Bureau of Statistics</title>
 
-    
+
     <link rel="stylesheet" href="{{ asset('assets/vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
@@ -81,7 +81,10 @@
                   <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
                 </div>
                 <a class="dropdown-item" href="{{ route('profile') }}"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="dropdown-item" type="submit"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</button>
+                </form>
               </div>
             </li>
           </ul>

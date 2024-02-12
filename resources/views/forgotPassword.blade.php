@@ -25,42 +25,21 @@
                   <img src="{{ asset('assets/images/adsbs_logo.png') }}" alt="ADSBS Logo" style="width: 5rem">
 
                 </div>
-                <h4>Hello! Welcome Back!</h4>
-                <h6 class="font-weight-light">Sign in to continue.</h6>
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                                {{ $error }}
-                            @endforeach
-                    </div>
-                @endif
-
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-
-
-                <form class="pt-3" method="POST" action="{{ route('login') }}">
-                    @csrf
+                <h4>Hello! Forgot Password?</h4>
+                <h6 class="font-weight-light">Enter your registered Emaill Address to continue.</h6>
+                <form class="pt-3" method="POST" action="{{ route('forgotPassword') }}">
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="Email or Phone Number" required title="Password">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" required title="Password">
+                    <input type="email" class="form-control form-control-lg" id="registeredEmail" placeholder="Email Address">
                   </div>
                   <div class="mt-3">
-                    <button class="btn btn-block btn-success btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                    <button class="btn btn-block btn-success btn-lg font-weight-medium auth-form-btn">SUBMIT</button>
                   </div>
                   <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="form-check">
                       <label class="form-check-label text-muted">
-                        <input type="checkbox" class="form-check-input"> Keep me signed in </label>
+                        Go back to <a href="{{ route('home') }}" class="auth-link text-black">LOGIN</a>
+                    </label>
                     </div>
-                    <a href="{{ route('forgotPassword') }}" class="auth-link text-black">Forgot password?</a>
                   </div>
                   </div>
                 </form>
