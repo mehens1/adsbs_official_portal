@@ -14,7 +14,8 @@ Route::post('/logout', [AuthController::class, "logout"])->name('logout');
 
 
 
-Route::middleware(['portalAuth'])->group(function() {
+Route::group(['middleware' => 'portalAuth'], function () {
+// Route::middleware(['portalAuth'])->group(function() {
 
     Route::prefix('portal')->group(function() {
         Route::get('/', [DashboardController::class, "dashboard"])->name('dashboard');

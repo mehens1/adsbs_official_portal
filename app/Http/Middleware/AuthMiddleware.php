@@ -21,6 +21,11 @@ class AuthMiddleware
         {
             return redirect('/');
         }
+
+        $user = Auth::user();
+        // $request->merge(['user' => $user]);
+        \View::share('user', $user);
+
         return $next($request);
     }
 }

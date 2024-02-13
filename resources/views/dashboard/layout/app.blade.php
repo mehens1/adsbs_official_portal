@@ -38,47 +38,30 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
                 <a class="dropdown-item py-3">
-                  <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
+                  <p class="mb-0 font-weight-medium float-left">You have 1 unread mails </p>
                   <span class="badge badge-pill badge-primary float-right">View all</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="{{ asset('assets/images/faces/face10.jpg') }}" alt="image" class="img-sm profile-pic">
+                    <img src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="image" class="img-sm profile-pic">
                   </div>
                   <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
+                    <p class="preview-subject ellipsis font-weight-medium text-dark">{{ $user->first_name }} {{ $user->last_name }}</p>
                     <p class="font-weight-light small-text"> The meeting is cancelled </p>
                   </div>
                 </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="{{ asset('assets/images/faces/face12.jpg') }}" alt="image" class="img-sm profile-pic">
-                  </div>
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
-                    <p class="font-weight-light small-text"> The meeting is cancelled </p>
-                  </div>
-                </a>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image" class="img-sm profile-pic">
-                  </div>
-                  <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
-                    <p class="font-weight-light small-text"> The meeting is cancelled </p>
-                  </div>
-                </a>
+
               </div>
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="{{ asset('assets/images/faces/face8.jpg') }}" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
+                <img class="img-xs rounded-circle ml-2" src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="Profile image"> <span class="font-weight-normal"> {{ $user->first_name}} {{ $user->other_name}} {{ $user->last_name }} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="{{ asset('assets/images/faces/face8.jpg') }}" alt="Profile image">
-                  <p class="mb-1 mt-3">Allen Moreno</p>
-                  <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
+                  <img class="img-md rounded-circle" src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="Profile image" style="width: 5rem; height: 5rem">
+                  <p class="mb-1 mt-3">{{ $user->first_name}} {{ $user->other_name}} {{ $user->last_name }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ $user->email == "" ? $user->phone_number : $user->email }}</p>
                 </div>
                 <a class="dropdown-item" href="{{ route('profile') }}"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -100,12 +83,12 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{ asset('assets/images/faces/face8.jpg') }}" alt="profile image">
+                  <img class="img-xs rounded-circle" src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Allen Moreno</p>
-                  <p class="designation">Administrator</p>
+                  <p class="profile-name">{{ $user->first_name}} {{ $user->other_name}} {{ $user->last_name }}</p>
+                  <p class="designation">{{ $user->role == "" ? $user->email : $user->role }}</p>
                 </div>
                 <div class="icon-container">
                   <i class="icon-bubbles"></i>
@@ -124,57 +107,45 @@
             </li>
             <li class="nav-item nav-category"><span class="nav-link">Pages</span></li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <a class="nav-link" data-toggle="collapse" href="#home-page" aria-expanded="false" aria-controls="home-page">
                 <span class="menu-title">Home Page</span>
                 <i class="icon-layers menu-icon"></i>
               </a>
-              <div class="collapse" id="ui-basic">
+              <div class="collapse" id="home-page">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/ui-features/buttons.html') }}">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/ui-features/typography.html') }}">Typography</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">Prices</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">Key Statistics</a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('assets/pages/icons/simple-line-icons.html') }}">
-                <span class="menu-title">Icons</span>
+              <a class="nav-link" href="{{ asset('') }}">
+                <span class="menu-title">News</span>
                 <i class="icon-globe menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ asset('assets/pages/forms/basic_elements.html') }}">
-                <span class="menu-title">Form Elements</span>
+                <span class="menu-title">Publications</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ asset('assets/pages/charts/chartist.html') }}">
-                <span class="menu-title">Charts</span>
-                <i class="icon-chart menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ asset('assets/pages/tables/basic-table.html') }}">
-                <span class="menu-title">Tables</span>
-                <i class="icon-grid menu-icon"></i>
-              </a>
-            </li>
+
             <li class="nav-item nav-category"><span class="nav-link">Administration</span></li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="menu-title">General Pages</span>
-                <i class="icon-doc menu-icon"></i>
-              </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/samples/login.html') }}"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/samples/register.html') }}"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/samples/error-404.html') }}"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/samples/error-500.html') }}"> 500 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('assets/pages/samples/blank-page.html') }}"> Blank Page </a></li>
-                </ul>
-              </div>
+                <a class="nav-link" data-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+                  <span class="menu-title">Users</span>
+                  <i class="icon-user menu-icon"></i>
+                </a>
+                <div class="collapse" id="users">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">Add User</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">View Users</a></li>
+                  </ul>
+                </div>
             </li>
+
+
             <li class="nav-item pro-upgrade">
               <span class="nav-link">
                 <a class="btn btn-block px-0 btn-rounded btn-upgrade" href="https://www.bootstrapdash.com/product/stellar-admin-template/" target="_blank"> <i class="icon-badge mx-2"></i> Upgrade to Pro</a>
