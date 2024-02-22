@@ -41,7 +41,10 @@ class AuthController extends Controller
         ];
 
         if(Auth::attempt($credentials)){
-            return redirect()->route('dashboard');
+            $auth_user = Auth::user();
+            $token = Str::random(60);
+            $auth_user->update(['token' => $token]);
+            return redirect()->route('dashboard')->with('success', 'Login successful.');
         }
 
         throw ValidationException::withMessages(['username' => 'Invalid credentials']);

@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ $data['page'] }} :: Adamawa State Bureau of Statistics</title>
 
-
     <link rel="stylesheet" href="{{ asset('assets/vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> <!-- End layout styles -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/adsbs_logo.png') }}" />
   </head>
   <body>
@@ -44,10 +43,10 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="image" class="img-sm profile-pic">
+                    <img src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="image" class="img-sm profile-pic">
                   </div>
                   <div class="preview-item-content flex-grow py-2">
-                    <p class="preview-subject ellipsis font-weight-medium text-dark">{{ $user->first_name }} {{ $user->last_name }}</p>
+                    <p class="preview-subject ellipsis font-weight-medium text-dark">{{ $auth_user->first_name }} {{ $auth_user->last_name }}</p>
                     <p class="font-weight-light small-text"> The meeting is cancelled </p>
                   </div>
                 </a>
@@ -56,12 +55,12 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="Profile image"> <span class="font-weight-normal"> {{ $user->first_name}} {{ $user->other_name}} {{ $user->last_name }} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="Profile image"> <span class="font-weight-normal"> {{ $auth_user->first_name}} {{ $auth_user->other_name}} {{ $auth_user->last_name }} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="Profile image" style="width: 5rem; height: 5rem">
-                  <p class="mb-1 mt-3">{{ $user->first_name}} {{ $user->other_name}} {{ $user->last_name }}</p>
-                  <p class="font-weight-light text-muted mb-0">{{ $user->email == "" ? $user->phone_number : $user->email }}</p>
+                  <img class="img-md rounded-circle" src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="Profile image" style="width: 5rem; height: 5rem">
+                  <p class="mb-1 mt-3">{{ $auth_user->first_name}} {{ $auth_user->other_name}} {{ $auth_user->last_name }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ $auth_user->email == "" ? $auth_user->phone_number : $auth_user->email }}</p>
                 </div>
                 <a class="dropdown-item" href="{{ route('profile') }}"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -83,12 +82,12 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{ $user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $user->profile_picture }}" alt="profile image">
+                  <img class="img-xs rounded-circle" src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">{{ $user->first_name}} {{ $user->other_name}} {{ $user->last_name }}</p>
-                  <p class="designation">{{ $user->role == "" ? $user->email : $user->role }}</p>
+                  <p class="profile-name">{{ $auth_user->first_name}} {{ $auth_user->other_name}} {{ $auth_user->last_name }}</p>
+                  <p class="designation">{{ $auth_user->role == "" ? $auth_user->email : $auth_user->role }}</p>
                 </div>
                 <div class="icon-container">
                   <i class="icon-bubbles"></i>
@@ -109,48 +108,45 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#home-page" aria-expanded="false" aria-controls="home-page">
                 <span class="menu-title">Home Page</span>
-                <i class="icon-layers menu-icon"></i>
+                <i class="icon-home menu-icon"></i>
               </a>
               <div class="collapse" id="home-page">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">Prices</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">Key Statistics</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('prices') }}">Prices</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('keyStatistics') }}">Key Statistics</a></li>
                 </ul>
               </div>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('') }}">
-                <span class="menu-title">News</span>
-                <i class="icon-globe menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ asset('assets/pages/forms/basic_elements.html') }}">
-                <span class="menu-title">Publications</span>
-                <i class="icon-book-open menu-icon"></i>
-              </a>
+                <a class="nav-link" data-toggle="collapse" href="#publications" aria-expanded="false" aria-controls="publications">
+                  <span class="menu-title">Publications</span>
+                  <i class="icon-globe menu-icon"></i>
+                </a>
+                <div class="collapse" id="publications">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('addPublication') }}">Add Publication</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('publications') }}">Publications</a></li>
+                  </ul>
+                </div>
             </li>
 
             <li class="nav-item nav-category"><span class="nav-link">Administration</span></li>
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
                   <span class="menu-title">Users</span>
-                  <i class="icon-user menu-icon"></i>
+                  <i class="icon-people menu-icon"></i>
                 </a>
                 <div class="collapse" id="users">
                   <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">Add User</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ asset('') }}">View Users</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('addUser') }}">Add Users</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('users') }}">Users</a></li>
                   </ul>
                 </div>
             </li>
 
 
-            <li class="nav-item pro-upgrade">
-              <span class="nav-link">
-                <a class="btn btn-block px-0 btn-rounded btn-upgrade" href="https://www.bootstrapdash.com/product/stellar-admin-template/" target="_blank"> <i class="icon-badge mx-2"></i> Upgrade to Pro</a>
-              </span>
-            </li>
           </ul>
         </nav>
         <!-- partial -->
@@ -158,8 +154,6 @@
           <div class="content-wrapper">
             @yield('content')
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Adamawa State Bureau of Statistics {{ date('Y') }}</span>

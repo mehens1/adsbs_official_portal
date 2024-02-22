@@ -24,7 +24,7 @@ class AuthMiddleware
 
         $user = Auth::user();
         // $request->merge(['user' => $user]);
-        \View::share('user', $user);
+        \View::share('auth_user', $user);
 
         return $next($request);
     }

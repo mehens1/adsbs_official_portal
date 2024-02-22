@@ -15,11 +15,25 @@ Route::post('/logout', [AuthController::class, "logout"])->name('logout');
 
 
 Route::group(['middleware' => 'portalAuth'], function () {
-// Route::middleware(['portalAuth'])->group(function() {
 
     Route::prefix('portal')->group(function() {
         Route::get('/', [DashboardController::class, "dashboard"])->name('dashboard');
-        Route::get('/tables', [DashboardController::class, "tables"])->name('tables');
+        Route::get('/prices', [DashboardController::class, "prices"])->name('prices');
+        Route::get('/add-new-price', [DashboardController::class, "addPrice"])->name('addPrice');
+        Route::post('/add-new-price', [DashboardController::class, "submitNewPrice"])->name('submitNewPrice');
+        Route::get('/key-statistics', [DashboardController::class, "keyStatistics"])->name('keyStatistics');
+        Route::get('/add-user', [DashboardController::class, "addUser"])->name('addUser');
+        Route::post('/add-user', [DashboardController::class, "submitNewUser"])->name('submitNewUser');
+        Route::get('/users', [DashboardController::class, "users"])->name('users');
+        Route::get('/view-user/{id}', [DashboardController::class, "viewUser"])->name('viewUser');
+        Route::delete('/delete-user/{user}', [DashboardController::class, "viewUser"])->name('deleteUser');
+        Route::get('/deactivate-user', [DashboardController::class, "deactivateUser"])->name('deactivateUser');
+
+        Route::get('/publications', [DashboardController::class, "publications"])->name('publications');
+        Route::get('/addPublication', [DashboardController::class, "addPublication"])->name('addPublication');
+        Route::post('/add-publication', [DashboardController::class, "submitNewPublication"])->name('submitNewPublication');
+
+        // Route::get('/deactivate-user', [DashboardController::class, "prices"])->name('prices');
 
         Route::prefix('profile')->group(function() {
             Route::get('/', [DashboardController::class, "profile"])->name('profile');
