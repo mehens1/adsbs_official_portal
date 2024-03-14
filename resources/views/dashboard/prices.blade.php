@@ -26,11 +26,9 @@
           <table class="table">
             <thead>
               <tr>
+                  <th class="font-weight-bold">Year & Month</th>
                 <th class="font-weight-bold">Content</th>
-                <th class="font-weight-bold">Month</th>
                 <th class="font-weight-bold">Link</th>
-                <th class="font-weight-bold">Date & Time Created</th>
-                <th class="font-weight-bold">Last Updated</th>
                 <th class="font-weight-bold">Action(s)</th>
               </tr>
             </thead>
@@ -39,16 +37,21 @@
                 @foreach ($data['prices'] as $price)
 
                 <tr>
-                    <td>{{ $price['description'] }}</td>
-                    <td>{{ $price['hyperlink'] }}</td>
-                    <td>{{ $price['created_at'] }}</td>
-                    <td>{{ $price['updated_at'] }}</td>
+                    <td>{{ $price['created_at']->format('F, Y') }}</td>
+                    <td style="color: green">{!! Illuminate\Support\Str::limit($price['description'], 50) !!}</td>
+                    <td>
+                        @if ($price['hyperlink'])
+                            <button class="btn btn-dark">View</button>
+                        @else
+                            <button class="btn btn-dark" disabled>No Link</button>
+                        @endif
+                    </td>
 
                     <td>
-                        <a href="{{ route('viewUser', ['id' => $price->id]) }}" class="btn btn-icon bg-success">
-                            <button class="btn btn-icon bg-success"><i class="icon-eye text-white"></i></button>
+                        <a href="{{ route('editPrice', ['id' => $price->id]) }}" class="btn btn-icon bg-success">
+                            <button class="btn btn-icon bg-success"><i class="icon-pencil text-white"></i></button>
                         </a>
-                        <form action="{{ route('deleteUser', ['user' => $price]) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('deletePriceWatch', ['id' => $price]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-icon bg-danger">

@@ -20,7 +20,6 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        // Get counts from the database
         $marketPriceWatch = MarketPriceWatch::count();
         $total_publications = Publication::count();
         $total_users = User::count();
@@ -53,27 +52,71 @@ class DashboardController extends Controller
 
     public function addPrice()
     {
-
         $data = [
             'page' => 'Add Price',
         ];
         return view('dashboard.addPrice', compact('data'));
     }
 
-    public function submitNewPrice(Request $req)
+    public function submitNewPriceWatch(Request $req)
+    {
+        $text = $req->input('editor');
+        $existingRecord = MarketPriceWatch::where('description', $text)->first();
+        if($existingRecord){
+            return redirect()->back()->withErrors(['Looks like you are entering a duplicate data!']);
+        }
+        $newPrice = new MarketPriceWatch();
+        $newPrice->description = $text;
+        $newPrice->save();
+
+        return redirect()->back()->with('success', 'New Price Published and posted to the site!');
+    }
+
+    public function editPrice($id)
     {
 
-        return $req;
+        $price = MarketPriceWatch::findOrFail($id);
+        if($price){
+            $data = [
+                'page' => 'Edit Prices',
+                'price' => $price,
+            ];
+            return view('dashboard.editPrice', compact('data'));
+        }
+        return redirect()->back()->withErrors(['Looks like this price is not available, please do not imput manual!']);
+    }
 
-        $data = [
-            'page' => 'Add Prices',
-        ];
-        return view('dashboard.prices', compact('data'));
+    public function updatePriceWatch(Request $request, $id)
+    {
+        $price = MarketPriceWatch::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'description' => 'required|string',
+        ]);
+
+        if ($price->update($validatedData)) {
+            return redirect()->back()->with('success', 'Price details updated successfully');
+        } else {
+            return redirect()->back()->withErrors(['Something went wrong updating!']);
+        }
+    }
+
+    public function deletePriceWatch(Request $request, $id)
+    {
+        $price = MarketPriceWatch::findOrFail($id);
+
+        if ( $price->delete() ) {
+            return redirect()->back()->with('success', 'Price record deleted successfully');
+        } else {
+            return redirect()->back()->withErrors(['Something went wrong deleting!']);
+        }
     }
 
     public function prices()
     {
-        $prices = MarketPriceWatch::all();
+
+        $prices = MarketPriceWatch::orderByDesc('created_at')->get();
+
         $data = [
             'page' => 'Prices',
             'prices' => $prices,

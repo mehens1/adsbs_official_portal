@@ -20,7 +20,14 @@ Route::group(['middleware' => 'portalAuth'], function () {
         Route::get('/', [DashboardController::class, "dashboard"])->name('dashboard');
         Route::get('/prices', [DashboardController::class, "prices"])->name('prices');
         Route::get('/add-new-price', [DashboardController::class, "addPrice"])->name('addPrice');
-        Route::post('/add-new-price', [DashboardController::class, "submitNewPrice"])->name('submitNewPrice');
+        Route::post('/publish-price-watch', [DashboardController::class, "submitNewPriceWatch"])->name('submitNewPriceWatch');
+        Route::get('/edit-new-price/{id}/edit', [DashboardController::class, "editPrice"])->name('editPrice');
+        Route::put('/edit-new-price/{id}', [DashboardController::class, "updatePriceWatch"])->name('updatePriceWatch');
+
+
+        Route::delete('/delete-price/{id}', [DashboardController::class, "deletePriceWatch"])->name('deletePriceWatch');
+
+
         Route::get('/key-statistics', [DashboardController::class, "keyStatistics"])->name('keyStatistics');
         Route::get('/add-user', [DashboardController::class, "addUser"])->name('addUser');
         Route::post('/add-user', [DashboardController::class, "submitNewUser"])->name('submitNewUser');
@@ -32,6 +39,8 @@ Route::group(['middleware' => 'portalAuth'], function () {
         Route::get('/publications', [DashboardController::class, "publications"])->name('publications');
         Route::get('/addPublication', [DashboardController::class, "addPublication"])->name('addPublication');
         Route::post('/add-publication', [DashboardController::class, "submitNewPublication"])->name('submitNewPublication');
+
+
 
         // Route::get('/deactivate-user', [DashboardController::class, "prices"])->name('prices');
 
