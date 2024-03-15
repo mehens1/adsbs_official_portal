@@ -43,7 +43,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="image" class="img-sm profile-pic">
+                    {{-- <img src="{{ $auth_user->profile_picture == "" ? asset('profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="image" class="img-sm profile-pic"> --}}
                   </div>
                   <div class="preview-item-content flex-grow py-2">
                     <p class="preview-subject ellipsis font-weight-medium text-dark">{{ $auth_user->first_name }} {{ $auth_user->last_name }}</p>
@@ -55,10 +55,10 @@
             </li>
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="Profile image"> <span class="font-weight-normal"> {{ $auth_user->first_name}} {{ $auth_user->other_name}} {{ $auth_user->last_name }} </span></a>
+                <img class="img-xs rounded-circle ml-2" src="{{ asset('assets/images/faces/' . ($auth_user->profile_picture == '' ? 'profile_image_placeholder.jpg' : $auth_user->profile_picture) ) }}" alt="Profile image"> <span class="font-weight-normal"> {{ $auth_user->first_name}} {{ $auth_user->other_name}} {{ $auth_user->last_name }} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="Profile image" style="width: 5rem; height: 5rem">
+                  <img class="img-md rounded-circle" src="{{ asset('assets/images/faces/' . ($auth_user->profile_picture == '' ? 'profile_image_placeholder.jpg' : $auth_user->profile_picture) ) }}" alt="Profile image" style="width: 5rem; height: 5rem">
                   <p class="mb-1 mt-3">{{ $auth_user->first_name}} {{ $auth_user->other_name}} {{ $auth_user->last_name }}</p>
                   <p class="font-weight-light text-muted mb-0">{{ $auth_user->email == "" ? $auth_user->phone_number : $auth_user->email }}</p>
                 </div>
@@ -82,7 +82,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{ $auth_user->profile_picture == "" ? asset('assets/images/faces/profile_image_placeholder.jpg') : $auth_user->profile_picture }}" alt="profile image">
+                  <img class="img-xs rounded-circle" src="{{ asset('assets/images/faces/' . ($auth_user->profile_picture == '' ? 'profile_image_placeholder.jpg' : $auth_user->profile_picture) ) }}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
