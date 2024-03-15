@@ -91,13 +91,15 @@
             <a href="{{ route('addUser') }}"><button type="button" class="btn px-0"> <i class="icon-user mr-2"></i> Add User</button></a>
         </div>
         <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-          <button type="button" class="btn px-0"><i class="icon-docs mr-2"></i> Post News</button>
+            <a href="#">
+                <button type="button" class="btn px-0"><i class="icon-docs mr-2"></i> Post News</button>
+            </a>
         </div>
         <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-          <button type="button" class="btn px-0"><i class="icon-folder mr-2"></i> Publish new Price</button>
+            <a href="{{ route('addPrice') }}"><button type="button" class="btn px-0"><i class="icon-folder mr-2"></i> Publish new Price</button></a>
         </div>
         <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-          <button type="button" class="btn px-0"><i class="icon-book-open mr-2"></i>Create Publication</button>
+          <a href="{{ route('addPublication') }}"><button type="button" class="btn px-0"><i class="icon-book-open mr-2"></i>Create Publication</button></a>
         </div>
       </div>
     </div>
