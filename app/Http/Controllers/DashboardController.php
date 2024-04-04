@@ -244,7 +244,7 @@ class DashboardController extends Controller
 
         if ($req->hasFile('uploaded_picture')) {
             $picture = $req->file('uploaded_picture');
-            $destinationPath = public_path('assets/images/faces');
+            $destinationPath = 'assets/images/faces';
             $image_name = strtolower($user->first_name) . '_' . strtolower($user->last_name) . '_profile_' . '.' . $picture->getClientOriginalExtension();
             $picture->move($destinationPath, $image_name);
             $user->profile_picture = $image_name;
@@ -260,7 +260,7 @@ class DashboardController extends Controller
         if(!$user) { return redirect()->back()->withErrors(['User not found']);
         }
         if ($user->profile_picture) {
-            $filePath = public_path('assets/images/faces/' . $user->profile_picture);
+            $filePath = 'assets/images/faces' . $user->profile_picture;
             if( File::exists($filePath) ){ File::delete($filePath); }
             $user->profile_picture = null;
             $user->save();
